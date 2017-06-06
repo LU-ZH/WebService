@@ -44,7 +44,9 @@ public class UserController {
     }
 
     @RequestMapping("addUser")
-    public ModelAndView addUser(User user) {
+    public ModelAndView addUser(User user, HttpServletRequest request) {
+        System.out.println(request.getCharacterEncoding());
+        System.out.println(user.getName());
         wsUserService.addUser(user);
         System.out.println("添加成功。");
         return new ModelAndView("redirect:/selectUser2.do");
@@ -80,7 +82,7 @@ public class UserController {
         }
         System.out.println("查询完成。");
         ModelAndView mv = new ModelAndView();
-        mv.addObject("list",users);
+        mv.addObject("list", users);
         mv.setViewName("show2");
         return mv;
     }
